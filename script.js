@@ -2,6 +2,8 @@
 const main = document.querySelector(".main");
 const holes = document.querySelectorAll(".hole");
 const pointsElement = document.querySelector("#points");
+const difficultySlider = document.querySelector("#difficultySlider");
+const difficulty = document.querySelector("#difficulty");
 
 const moleSRC = "images/mole.png";
 const holeSRC = "images/hole.png";
@@ -9,8 +11,11 @@ const holeSRC = "images/hole.png";
 holesList = [];
 
 spawnMole();
+displayDifficulty()
 
 let points = 0;
+let difficultyValue = Math.floor(difficultySlider.value / 10 / 4 + 1);
+
 
 holes.forEach((hole) => {
     
@@ -21,10 +26,11 @@ holes.forEach((hole) => {
     hole.addEventListener("click", () => {
 
         console.log(hole.src);
+        difficultyValue = Math.floor(difficultySlider.value / 10 / 4 + 1);
 
         if (hole.src != holeSRC) {
             hole.src = holeSRC;
-            spawnMole();
+            setDifficulty(difficultyValue);
             addPoint();
         }
     });
@@ -41,7 +47,7 @@ function wait(x) {
 async function spawnMole() {
     const x = await wait(10);
 
-    const moleID = getRandomInt(0, 5);
+    const moleID = getRandomInt(0, 9);
     console.log(moleID);
     holes[moleID].src = moleSRC;
 }
@@ -56,4 +62,20 @@ function getRandomInt(min, max) {
 function addPoint() {
     points += 1;
     pointsElement.textContent = points;
+}
+
+difficultySlider.oninput = () => {
+    displayDifficulty();
+};
+
+function displayDifficulty() {
+    // difficultyValue = Math.floor(difficultySlider.value / 10 / 4 + 1);
+    difficulty.textContent = Math.floor(difficultySlider.value / 10 / 4 + 1);
+}
+
+function setDifficulty(difficulty) {
+    for (let i = 0; i < difficulty; i++) {
+        console.log(i);
+        spawnMole();
+    }
 }
