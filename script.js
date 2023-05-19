@@ -17,7 +17,8 @@ const holeSRC = "images/hole.png";
 let points = 0;
 let highScore = 0;
 let difficultyValue = Math.floor(difficultySlider.value / 10 / 4 + 1);
-let timerLength = Math.floor(timerSlider.value / 2);
+let timerLength = Math.floor(timerSlider.value);
+let startingTime = timerLength;
 let timerOn = false;
 
 timerElement.textContent = timerLength;
@@ -39,7 +40,7 @@ holes.forEach((hole) => {
 
         // console.log(hole.src);
         difficultyValue = Math.floor(difficultySlider.value / 10 / 4 + 1);
-        timerLength = Math.floor(timerSlider.value / 2);
+        timerLength = Math.floor(timerSlider.value);
 
         if (hole.src != holeSRC) {
 
@@ -116,7 +117,24 @@ function setDifficulty(difficulty) {
 function showMessage() {
     main.style = "display : none;";
     message.style = "display : block;"
-    message.children[0].textContent = `Well done! You scored ${points} points!`
+
+    switch (points) {
+        case 420:
+            message.children[0].textContent = `Impressive Karlos! You scored ${points} points in ${startingTime} seconds!`;
+            break;
+    
+
+        case 69:
+            message.children[0].textContent = `I see you Karlos! You scored ${points} points in ${startingTime} seconds!`;
+            break;
+    
+        default:
+            message.children[0].textContent = `Well done! You scored ${points} points in ${startingTime} seconds!`;
+            break;
+    }
+        
+
+    
 
     // await wait(1000);
     // message.style = "display : none;"
@@ -148,10 +166,13 @@ function restartGame() {
     timerElement.textContent = timerLength;
 
     holes.forEach((hole) => {
+        console.log(hole.src);
         hole.src = holeSRC;
     });
 
     spawnMole();
+    displayDifficulty();
+    displayTimerValue();
 }
 
 
@@ -163,9 +184,12 @@ playAgain.addEventListener("click", () => {
 
 
 function displayTimerValue() { 
-    timerElement.textContent = Math.floor(timerSlider.value / 2);
+    let time = Math.floor(timerSlider.value);
+    timerElement.textContent = time;
+    startingTime = time;
 }
 
 timerSlider.oninput = () => {
     displayTimerValue();
+    
 };
