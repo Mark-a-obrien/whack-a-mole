@@ -9,6 +9,8 @@ const message = document.querySelector("#message");
 const timerElement = document.querySelector("#timer");
 const playAgain = document.querySelector("#play-again");
 const timerSlider = document.querySelector("#timerSlider");
+const toggleSoundButton = document.querySelector("#toggle-sound");
+const toggleSoundIcon = document.querySelector("#toggle-sound-icon");
 
 let whackSound = new Audio("sounds/whack.wav");
 let boomSound = new Audio("sounds/boom.ogg");
@@ -16,6 +18,7 @@ let boomSound = new Audio("sounds/boom.ogg");
 
 const moleSRC = "images/mole.png";
 const holeSRC = "images/hole.png";
+const toggleSoundIconSRC = toggleSoundIcon.src;
 
 let points = 0;
 let highScore = 0;
@@ -48,8 +51,11 @@ holes.forEach((hole) => {
         if (hole.src != holeSRC) {
 
             // Makes a whack sound
-            whackSound.currentTime = 0;
-            whackSound.play();  
+            if (whackSound) {
+                whackSound.currentTime = 0;
+                whackSound.play(); 
+            }
+             
 
             // disable timer slider. so user cant change time mid game
             timerSlider.disabled = true;
@@ -141,8 +147,10 @@ function showMessage() {
     }
         
     // Makes a whack sound
-    boomSound.currentTime = 0;
-    boomSound.play();  
+    if (whackSound) {
+        boomSound.currentTime = 0;
+        boomSound.play();  
+    }
     
 
     // await wait(1000);
@@ -202,3 +210,19 @@ timerSlider.oninput = () => {
     displayTimerValue();
     
 };
+
+
+toggleSoundButton.addEventListener("click", () => {
+    console.log(toggleSoundIcon.src);
+
+    if (toggleSoundIcon.src === toggleSoundIconSRC) {
+        toggleSoundIcon.src = "icons/sound-icon-off.png"
+        whackSound = null;
+        boomSound = null;
+    }
+    else {
+        toggleSoundIcon.src = "icons/sound-icon-on.png";
+        whackSound = new Audio("sounds/whack.wav");
+        boomSound = new Audio("sounds/boom.ogg");
+    }
+})
