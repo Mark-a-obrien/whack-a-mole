@@ -1,3 +1,9 @@
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
 .mole-grid {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -19,7 +25,7 @@
 }
 
 
-.point-section {
+.point-section, .range-section {
     display: flex;
     gap: 1rem;
 }
@@ -28,8 +34,12 @@
 
 @media only screen and (max-width: 600px) {
     .mole-grid {
-        display: grid;
-        grid-template-columns: auto auto;
-        padding: 10px
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .hole {
+        width: 100px;
+        height: 100px;
     }
 }
