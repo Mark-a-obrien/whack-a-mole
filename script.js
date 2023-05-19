@@ -10,6 +10,9 @@ const timerElement = document.querySelector("#timer");
 const playAgain = document.querySelector("#play-again");
 const timerSlider = document.querySelector("#timerSlider");
 
+let whackSound = new Audio("sounds/whack.wav");
+let boomSound = new Audio("sounds/boom.ogg");
+
 
 const moleSRC = "images/mole.png";
 const holeSRC = "images/hole.png";
@@ -43,6 +46,10 @@ holes.forEach((hole) => {
         timerLength = Math.floor(timerSlider.value);
 
         if (hole.src != holeSRC) {
+
+            // Makes a whack sound
+            whackSound.currentTime = 0;
+            whackSound.play();  
 
             // disable timer slider. so user cant change time mid game
             timerSlider.disabled = true;
@@ -133,7 +140,9 @@ function showMessage() {
             break;
     }
         
-
+    // Makes a whack sound
+    boomSound.currentTime = 0;
+    boomSound.play();  
     
 
     // await wait(1000);
