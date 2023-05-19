@@ -32,6 +32,37 @@ main {
 
 
 
+
+
+/* Message Start */
+#message {
+    display: none;
+    position: fixed;
+    bottom: 50%;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#message h1 {
+
+    font-size: 3rem;
+    color: rgb(177, 28, 28);
+}
+
+#message #play-again {
+    padding: 1rem;
+}
+
+/* Message End */
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 600px) {
     .mole-grid {
         margin-left: 0px;
@@ -42,4 +73,6 @@ main {
         width: 100px;
         height: 100px;
     }
+
+    
 }
